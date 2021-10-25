@@ -86,4 +86,12 @@ If you followd all the steps without mistakes your changes will be merged with t
 
 ![pullrequest](docs/pull_request.png)
 
-Good look!
+---
+
+How do i get the changes tht are made by my teammates ?
+
+To pull the changes from the upstream repository run the following command:
+
+```bash
+git fetch upstream
+```

@@ -6,6 +6,7 @@ public class Application {
      */
     public Application()
     {
+        this.connection = MySQL.createConnection("jdbc:mysql://localhost:3306/medisafe", "root", "");
     }
 
     /**
@@ -19,4 +20,5 @@ public class Application {
     /**
      * Private properties
      */
+    private MySQL connection; // Used to create a connection to MariaDB
 }

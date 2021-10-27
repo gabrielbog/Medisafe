@@ -1,8 +1,6 @@
 package com.medisafe.app.classes;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class MySQL
 {
@@ -46,10 +44,13 @@ public class MySQL
     }
 
     /**
+     * Public methods
+     */
+    /**
      * Get access to the private property conn
      * @return Return an object
      */
-    public Connection get_conn()
+    public Connection getConn()
     {
         return this.conn;
     }

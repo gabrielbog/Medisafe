@@ -1,5 +1,10 @@
 # Medisafe
 
+![medisafe](docs/design/Medisafe.png)
+
+Our project is based on medicine.
+
+# Github Organization
 First, click on the **Fork button** in the top-right corner. 
 
 ![fork](docs/fork.jpeg)
@@ -19,6 +24,16 @@ git clone https://github.com/<YourUserName>/Medisafe.git
 
 ---
 
+Create a new remote for the upstream repo with the command:
+```bash
+git remote add upstream https://github.com/vasilecampeanu/Medisafe
+```
+Why do I need to do this ?
+</br>
+Well, when a repository is cloned, it has a default remote called **origin** that points to your fork on GitHub, not the original repository it was forked from. To keep track of the original repository, you need to add another remote named. So, if you want to be able to keep track of the changes that are made by other members of the team you need to complete this step.
+
+---
+
 Medisafe branches:
 
 ![branches](docs/branches.png)
@@ -33,33 +48,7 @@ Why do I need to do this ?
 <br>
 Because the **main branch** will be preserved only for changes that are tested and stable. Using a development branch is good practice because it kips the main branch clean, macking the end user experience better, by reducing the likelihood of bugs and unintended errors.
 
----
-
-Now that you are on the development branch you need to do two things:
-
-1. Create a new branch by issuing the command:
-
-```bash
-git checkout -b new_branch
-```
-
-![new_branch](docs/new_branch.png)
-
-On this branch you will make all your contributions.
-
-2. Create a new remote for the upstream repo with the command:
-```bash
-git remote add upstream https://github.com/vasilecampeanu/Medisafe
-```
-Why you need to do this ?
-</br>
-Well, when a repository is cloned, it has a default remote called **origin** that points to your fork on GitHub, not the original repository it was forked from. To keep track of the original repository, you need to add another remote named. 
-<br>
-So, if you want to be able to keep track of the changes that are made by other members of the team you need to complete this step.
-
----
-
-Now you are ready to make you first contribution to Medisafe.
+Now that you are on the development branch you can make you contribution.
 
 ---
 
@@ -73,18 +62,8 @@ git commit -m "feat: Your message"
 After you commited your changes is time to push them to the remote repository:
 
 ```bash
-git push -u origin new_branch 
+git push -u origin develop
 ```
-
-Don't forget to specify the name of the branch you created after origin. It is no longer the develop or main branch!
-
-Now, after you pushed your changes, on the github page you will be able to make a **Pull Request**. 
-
-The pull request is the last step.
-
-If you followd all the steps without mistakes your changes will be merged with the develop branch by the owner of the repository.
-
-![pullrequest](docs/pull_request.png)
 
 ---
 

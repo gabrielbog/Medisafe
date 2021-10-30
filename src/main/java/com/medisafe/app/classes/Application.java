@@ -1,6 +1,10 @@
 package com.medisafe.app.classes;
 
-import javax.swing.plaf.synth.SynthTabbedPaneUI;
+import com.medisafe.app.gui.login.LogInFrame;
+import com.medisafe.app.gui.signup.SignUpFrame;
+import com.medisafe.app.gui.user.UserFrame;
+
+import javax.swing.plaf.nimbus.State;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -46,8 +50,11 @@ public class Application
      */
     public void run() throws SQLException 
     {
-        this.display_users();
+        //this.display_users();
         // this.insert_user("Test", "Test", "Test");
+        LogInFrame.logInFrame = new LogInFrame();
+        //SignUpFrame.signUpFrame = new SignUpFrame();
+        //UserFrame.userFrame = new UserFrame();
     }
 
     /**

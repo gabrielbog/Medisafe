@@ -1,25 +1,28 @@
-package com.medisafe.app.gui.user;
+package com.medisafe.app.gui.medic;
+
+import com.medisafe.app.gui.user.UserInfoFrame;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-public class CreateAppointmentLabel extends JLabel implements MouseListener {
-    
-    public CreateAppointmentLabel(){
+public class MedicInfoLabel extends JLabel implements MouseListener {
+    MedicInfoLabel(){
+        this.setText("!");
+        this.setForeground(Color.BLACK);
+        this.setFont(new Font("Arial", Font.BOLD, 32));
+        this.setHorizontalAlignment(JLabel.CENTER);
         this.setOpaque(true);
-        this.setBackground(new Color(36, 37, 38));
-        this.setFont(new Font("Arial", Font.PLAIN, 18));
-        this.setForeground(Color.white);
-        this.setText("   Create appointment");    
-        this.setBounds(430, 145, 800, 50);
+        this.setBackground(Color.white);
+        this.setBounds(1200, 10, 30, 30);
         this.addMouseListener(this);
     }
     
     @Override
     public void mouseClicked(MouseEvent e) {
-        CreateAppointmentFrame.createAppointmentFrame = new CreateAppointmentFrame();
+        System.out.println("test");
+        MedicInfoFrame.medicInfoFrame = new MedicInfoFrame();
     }
 
     @Override

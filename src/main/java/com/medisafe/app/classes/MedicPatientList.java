@@ -144,7 +144,7 @@ public abstract class MedicPatientList
             
         return latestPatientId;
     }
-    
+
     public static int getLatestMedicId()
     {
         int latestMedicId = 0;

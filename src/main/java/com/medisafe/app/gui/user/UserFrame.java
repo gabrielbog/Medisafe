@@ -4,6 +4,8 @@ import com.medisafe.app.classes.MedicPatientList;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class UserFrame extends JFrame {
     public static UserFrame userFrame;
@@ -54,12 +56,28 @@ public class UserFrame extends JFrame {
         topLabel.add(titleLabel);
         topLabel.add(userInfoLabel);
         
-        warningLabel = new JLabel("    WARNING: We need more informations about you. Complete your registration now");
-        warningLabel.setOpaque(true);
-        warningLabel.setBackground(new Color(152, 100, 0));
-        warningLabel.setForeground(Color.WHITE);
-        warningLabel.setFont(new Font("Arial", Font.PLAIN, 18));
-        warningLabel.setBounds(15, 60, 1215, 50);
+        if (MedicPatientList.getCurrentPatient().getLname().equals("") || MedicPatientList.getCurrentPatient().getLname().equals("")){
+            warningLabel = new JLabel("    WARNING: We need more informations about you. Press here or in the top right corner to complete your registration.");
+            warningLabel.setOpaque(true);
+            warningLabel.setBackground(new Color(152, 100, 0));
+            warningLabel.setForeground(Color.WHITE);
+            warningLabel.setFont(new Font("Arial", Font.PLAIN, 18));
+            warningLabel.setBounds(15, 60, 1215, 50);
+            
+            warningLabel.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    UserInfoFrame.userInfoFrame = new UserInfoFrame();
+                }
+
+                @Override
+                public void mouseEntered(MouseEvent e) {
+                    UserFrame.userFrame.warningLabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
+                }
+            });
+
+            userLabel.add(warningLabel);
+        }
         
         text1Label = new JLabel("My Appointments");
         text1Label.setForeground(Color.white);
@@ -89,12 +107,13 @@ public class UserFrame extends JFrame {
         feedLabel.setBounds(430, 240, 800, 445);
         
         userLabel.add(topLabel);
-        userLabel.add(warningLabel);
         userLabel.add(text1Label);
         userLabel.add(appointmentsScroll);
         userLabel.add(createAppointmentLabel);
         userLabel.add(text2Label);
         userLabel.add(feedLabel);
+
+        System.out.println();
         
         this.add(userLabel);
         this.pack();

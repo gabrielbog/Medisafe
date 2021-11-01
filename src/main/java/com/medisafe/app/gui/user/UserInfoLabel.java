@@ -1,5 +1,9 @@
 package com.medisafe.app.gui.user;
 
+import com.medisafe.app.classes.Medic;
+import com.medisafe.app.classes.MedicPatientList;
+import com.medisafe.app.classes.User;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
@@ -7,8 +11,10 @@ import java.awt.event.MouseListener;
 
 public class UserInfoLabel extends JLabel implements MouseListener {
     UserInfoLabel(){
-        //ImageIcon userLogo = new ImageIcon(getClass().getResource("src/main/java/com/medisafe/app/gui/user/userlogo.jpg"));
-        //this.setIcon(userLogo);
+        this.setText("!");
+        this.setForeground(Color.BLACK);
+        this.setFont(new Font("Arial", Font.BOLD, 32));
+        this.setHorizontalAlignment(JLabel.CENTER);
         this.setOpaque(true);
         this.setBackground(Color.white);
         this.setBounds(1200, 10, 30, 30);
@@ -17,7 +23,8 @@ public class UserInfoLabel extends JLabel implements MouseListener {
     
     @Override
     public void mouseClicked(MouseEvent e) {
-        System.out.println("Click test");
+        System.out.println("test");
+        UserInfoFrame.userInfoFrame = new UserInfoFrame();
     }
 
     @Override

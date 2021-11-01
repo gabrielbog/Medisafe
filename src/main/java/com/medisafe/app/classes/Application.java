@@ -41,14 +41,40 @@ public class Application
         }
     }
     
-    public void insert_user(String username, String email, String password) throws SQLException 
+    public static void insert_user(String username, String email, String password) throws SQLException 
     {
-        Statement statement = this.connection.getConn().createStatement();
+        Statement statement = connection.getConn().createStatement();
         statement.executeUpdate("INSERT INTO `users` (`id`, `username`, `email`, `fname`, `lname`, `password`, `medic`) VALUES (NULL, '"+ username +"', '"+ email +"', NULL, NULL, '"+ password +"', '0')");
         
         /*
         MedicPatientList.addPatient(id, username, email, password);
         */
+    }
+    
+    public static void insert_appointments(int mid, int uid, int day, int mounth, int year) throws SQLException 
+    {
+        Statement statement = connection.getConn().createStatement();
+        statement.executeUpdate("INSERT INTO `appointments` (`id`, `mid`, `uid`, `day`, `mounth`, `year`) VALUES (NULL, '" + mid+ "', '"+ uid +"', '" + day + "', '" + mounth + "', '" + year + "');");
+    }
+    
+    public static void load_appointments() throws SQLException 
+    {
+        Statement statement = connection.getConn().createStatement();
+        ResultSet appointments = statement.executeQuery("SELECT * FROM appointments");
+        
+        while (appointments.next())
+        {
+            int id     = appointments.getInt("id");
+            int mid    = appointments.getInt("mid");
+            int uid    = appointments.getInt("uid");
+            int day    = appointments.getInt("day");
+            int mounth = appointments.getInt("mounth");
+            int year   = appointments.getInt("year");
+            
+            System.out.println(id + " " + mid + " " + uid + " " + day + " " + mounth + " " + year);
+            
+            // Insert in vector
+        }
     }
     
     public void load_users() throws SQLException
@@ -88,10 +114,12 @@ public class Application
         LogInFrame.logInFrame = new LogInFrame();
         //SignUpFrame.signUpFrame = new SignUpFrame();
         //UserFrame.userFrame = new UserFrame();
+        //insert_appointments(1, 4, 1, 1, 2001);
+        load_appointments();
     }
 
     /**
      * Private properties
      */
-    private MySQL connection; // Used to create a connection to MariaDB
+    private static MySQL connection; // Used to create a connection to MariaDB
 }

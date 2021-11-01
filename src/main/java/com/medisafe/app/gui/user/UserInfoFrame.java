@@ -1,7 +1,8 @@
 package com.medisafe.app.gui.user;
 
+import com.medisafe.app.classes.Medic;
 import com.medisafe.app.classes.MedicPatientList;
-import com.medisafe.app.classes.User;
+import com.medisafe.app.classes.Patient;
 
 import javax.swing.*;
 import java.awt.*;
@@ -22,6 +23,8 @@ public class UserInfoFrame extends JFrame {
     JButton addLastNameButton;
     
     JLabel emailLabel;
+    
+    JButton medicButton;
     
     private static boolean modified = false;
     
@@ -67,7 +70,7 @@ public class UserInfoFrame extends JFrame {
             firstNameLabel = new JLabel("First name: " + MedicPatientList.getCurrentPatient().getFname());
             firstNameLabel.setForeground(Color.white);
             firstNameLabel.setFont(new Font("Arial", Font.PLAIN, 14));
-            firstNameLabel.setBounds(15, 15, 120, 15);
+            firstNameLabel.setBounds(15, 15, 320, 15);
 
             userInfoLabel.add(firstNameLabel);
         }
@@ -100,12 +103,12 @@ public class UserInfoFrame extends JFrame {
             userInfoLabel.add(lastNameLabel);
             userInfoLabel.add(addLastNameButton);
         }else{
-            firstNameLabel = new JLabel("Last name: " + MedicPatientList.getCurrentPatient().getLname());
-            firstNameLabel.setForeground(Color.white);
-            firstNameLabel.setFont(new Font("Arial", Font.PLAIN, 14));
-            firstNameLabel.setBounds(15, 45, 120, 15);
+            lastNameLabel = new JLabel("Last name: " + MedicPatientList.getCurrentPatient().getLname());
+            lastNameLabel.setForeground(Color.white);
+            lastNameLabel.setFont(new Font("Arial", Font.PLAIN, 14));
+            lastNameLabel.setBounds(15, 45, 320, 15);
 
-            userInfoLabel.add(firstNameLabel);
+            userInfoLabel.add(lastNameLabel);
         }
         
         emailLabel = new JLabel("Email: " + MedicPatientList.getCurrentPatient().getEmail());
@@ -114,6 +117,29 @@ public class UserInfoFrame extends JFrame {
         emailLabel.setBounds(15, 75, 320, 15);
         
         userInfoLabel.add(emailLabel);
+        
+        medicButton = new JButton();
+        medicButton.setText("Become medic");
+        medicButton.setBackground(new Color(204, 44, 44));
+        medicButton.setForeground(Color.white);
+        medicButton.setFont(new Font("Arial", Font.BOLD, 16));
+        medicButton.setBounds(15, 210, 320, 30);
+        medicButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (MedicPatientList.getCurrentPatient().getFname() == null || MedicPatientList.getCurrentPatient().getLname() == null){
+                    JOptionPane.showMessageDialog(null, "Registration incomplete", "Medisafe", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    int becomeMedic = JOptionPane.showConfirmDialog(null, "Are you sure you want to become a medic", "Medisafe", JOptionPane.YES_NO_OPTION);
+                    if (becomeMedic == JOptionPane.YES_OPTION) {
+                        // UserFrame.userFrame.dispose();
+                        //MedicFrame.medicFrame = new MedicFrame;
+                    }
+                }
+            }
+        });
+        
+        userInfoLabel.add(medicButton);
         
         this.add(userInfoLabel);
         

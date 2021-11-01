@@ -1,6 +1,7 @@
 package com.medisafe.app.gui.login;
 
 import com.medisafe.app.classes.MedicPatientList;
+import com.medisafe.app.gui.medic.MedicFrame;
 import com.medisafe.app.gui.user.UserFrame;
 
 import javax.swing.*;
@@ -110,7 +111,7 @@ public class LogInFrame extends JFrame {
                         password = null;
                         passwordField.setText("");
                         LogInFrame.logInFrame.dispose();
-                        UserFrame.userFrame = new UserFrame();
+                        MedicFrame.medicFrame = new MedicFrame();
                     }
 
                     else

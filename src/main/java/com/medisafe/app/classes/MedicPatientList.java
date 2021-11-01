@@ -14,7 +14,68 @@ public abstract class MedicPatientList
     private static Patient currentPatient = null;
     private static Medic currentMedic = null;
     
-    //methods
+    //get, set
+    public static Patient[] getPatientVector()
+    {
+        return patientVector;
+    }
+
+    public static void setPatientVector(Patient[] patientVector)
+    {
+        MedicPatientList.patientVector = patientVector;
+    }
+
+    public static Medic[] getMedicVector()
+    {
+        return medicVector;
+    }
+
+    public static void setMedicVector(Medic[] medicVector)
+    {
+        MedicPatientList.medicVector = medicVector;
+    }
+
+    public static int getPatientIndex()
+    {
+        return patientIndex;
+    }
+
+    public static void setPatientIndex(int patientIndex)
+    {
+        MedicPatientList.patientIndex = patientIndex;
+    }
+
+    public static int getMedicIndex()
+    {
+        return medicIndex;
+    }
+
+    public static void setMedicIndex(int medicIndex){
+        
+        MedicPatientList.medicIndex = medicIndex;
+    }
+
+    public static Patient getCurrentPatient()
+    {
+        return currentPatient;
+    }
+
+    public static void setCurrentPatient(Patient currentPatient)
+    {
+        MedicPatientList.currentPatient = currentPatient;
+    }
+
+    public static Medic getCurrentMedic()
+    {
+        return currentMedic;
+    }
+
+    public static void setCurrentMedic(Medic currentMedic)
+    {
+        MedicPatientList.currentMedic = currentMedic;
+    }
+
+    //other methods
     public static void addPatient(int id, String username, String email, String fname, String lname, String password, boolean medic)
     {
         patientVector[patientIndex] = new Patient(id, username, email, fname, lname, password, medic);

@@ -1,5 +1,7 @@
 package com.medisafe.app.gui.user;
 
+import com.medisafe.app.classes.MedicPatientList;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -16,7 +18,9 @@ public class UserFrame extends JFrame {
     JLabel warningLabel;
     
     JLabel text1Label;
-    JLabel appointmentsLabel;
+    //JLabel appointmentsLabel;
+    JList appointmentsList;
+    JScrollPane appointmentsScroll;
     
     CreateAppointmentLabel createAppointmentLabel;
     
@@ -62,10 +66,15 @@ public class UserFrame extends JFrame {
         text1Label.setFont(new Font("Arial", Font.PLAIN, 18));
         text1Label.setBounds(15, 125, 400, 15);
         
-        appointmentsLabel = new JLabel();
-        appointmentsLabel.setOpaque(true);
-        appointmentsLabel.setBackground(new Color(36, 37, 38));
-        appointmentsLabel.setBounds(15, 145, 400, 540);
+        //replaced appointmentslabel with a list + scrollpane
+        appointmentsList = new JList(MedicPatientList.getCurrentPatient().getAppointments());
+        appointmentsList.setOpaque(true);
+        appointmentsList.setBackground(new Color(36, 37, 38));
+        appointmentsList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        
+        appointmentsScroll = new JScrollPane(appointmentsList);
+        appointmentsScroll.setBounds(15, 145, 400, 540);
+        //end
         
         createAppointmentLabel = new CreateAppointmentLabel();
 
@@ -82,7 +91,7 @@ public class UserFrame extends JFrame {
         userLabel.add(topLabel);
         userLabel.add(warningLabel);
         userLabel.add(text1Label);
-        userLabel.add(appointmentsLabel);
+        userLabel.add(appointmentsScroll);
         userLabel.add(createAppointmentLabel);
         userLabel.add(text2Label);
         userLabel.add(feedLabel);

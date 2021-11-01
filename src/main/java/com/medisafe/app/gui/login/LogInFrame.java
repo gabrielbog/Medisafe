@@ -1,7 +1,12 @@
 package com.medisafe.app.gui.login;
 
+import com.medisafe.app.classes.MedicPatientList;
+import com.medisafe.app.gui.user.UserFrame;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -20,7 +25,8 @@ public class LogInFrame extends JFrame {
     JLabel passwordLabel;
     JPasswordField passwordField;
     
-    LogInButton logInButton;
+    //LogInButton logInButton;
+    JButton logInButton;
     
     JLabel textLabel;
     
@@ -68,7 +74,57 @@ public class LogInFrame extends JFrame {
         passwordField = new JPasswordField();
         passwordField.setBounds(15, 170, 320, 30);
         
-        logInButton = new LogInButton();
+        logInButton = new JButton();
+        logInButton.setText("LOG IN");
+        logInButton.setBackground(new Color(204, 44, 44));
+        logInButton.setForeground(Color.white);
+        logInButton.setFont(new Font("Arial", Font.BOLD, 16));
+        logInButton.setBounds(15, 210, 320, 30);
+        logInButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String username = usernameField.getText();
+                String password = String.valueOf(passwordField.getPassword());
+        
+                if(username.equals("") || password.equals(""))
+                {
+                    JOptionPane.showMessageDialog(null, "Please introduce details", "Error", JOptionPane.ERROR_MESSAGE);
+                    username = null;
+                    password = null;
+                    passwordField.setText("");
+                }
+        
+                else
+                {
+                    int verify = MedicPatientList.verifyUser(username, password);
+                    if(verify == 1)
+                    {
+                        username = null;
+                        password = null;
+                        passwordField.setText("");
+                        logInFrame.dispose();
+                        UserFrame.userFrame = new UserFrame();
+                    }
+
+                    else if(verify == 2)
+                    {
+                        username = null;
+                        password = null;
+                        passwordField.setText("");
+                        LogInFrame.logInFrame.dispose();
+                        UserFrame.userFrame = new UserFrame();
+                    }
+
+                    else
+                    {
+                        JOptionPane.showMessageDialog(null, "Incorrect Creditentials!", "Error", JOptionPane.ERROR_MESSAGE);
+                        username = null;
+                        password = null;
+                        passwordField.setText("");
+                    }
+                }
+            }
+        });
         
         textLabel = new JLabel("Are you new?");
         textLabel.setForeground(Color.white);

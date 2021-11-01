@@ -1,6 +1,8 @@
 package com.medisafe.app.gui.signup;
 
+import com.medisafe.app.classes.MedicPatientList;
 import com.medisafe.app.gui.login.LogInFrame;
+import com.medisafe.app.gui.user.UserFrame;
 
 import javax.swing.*;
 import java.awt.*;
@@ -25,7 +27,8 @@ public class SignUpFrame extends JFrame {
     JLabel passwordLabel;
     JPasswordField passwordField;
     
-    SignUpButton signUpButton;
+    //SignUpButton signUpButton;
+    JButton signUpButton;
     
     JButton backButton;
 
@@ -78,7 +81,58 @@ public class SignUpFrame extends JFrame {
         passwordField = new JPasswordField();
         passwordField.setBounds(15, 230, 320, 30);
         
-        signUpButton = new SignUpButton();
+        signUpButton = new JButton();
+        signUpButton.setText("Sign up");
+        signUpButton.setBackground(new Color(204, 44, 44));
+        signUpButton.setForeground(Color.white);
+        signUpButton.setFont(new Font("Arial", Font.PLAIN, 14));
+        signUpButton.setBounds(15, 270, 320, 30);
+        signUpButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String username = usernameField.getText();
+                String email = emailField.getText();
+                String password = String.valueOf(passwordField.getPassword());
+
+                if(username.equals("") || password.equals("") || email.equals(""))
+                {
+                    JOptionPane.showMessageDialog(null, "Please introduce details", "Error", JOptionPane.ERROR_MESSAGE);
+                    username = null;
+                    password = null;
+                    email = null;
+                    passwordField.setText("");
+                    emailField.setText("");
+                }
+
+                else
+                {
+                    int verify = MedicPatientList.verifyNewUser(username, email);
+                    if(verify == 1)
+                    {
+                        MedicPatientList.addPatient(MedicPatientList.getLatestPatientId() + 1, username, email, password);
+                        //save on database in case
+                        
+                        username = null;
+                        password = null;
+                        email = null;
+                        passwordField.setText("");
+                        emailField.setText("");
+                        signUpFrame.dispose();
+                        UserFrame.userFrame = new UserFrame();
+                    }
+
+                    else
+                    {
+                        JOptionPane.showMessageDialog(null, "Username/Email is already used by another user", "Error", JOptionPane.ERROR_MESSAGE);
+                        username = null;
+                        password = null;
+                        email = null;
+                        passwordField.setText("");
+                        emailField.setText("");
+                    }
+                }
+            }
+        });
         
         backButton = new JButton("Back");
         backButton.setBackground(new Color(204, 44, 44));

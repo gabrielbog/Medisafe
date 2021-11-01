@@ -7,7 +7,7 @@ import java.awt.event.MouseListener;
 
 public class UserInfoLabel extends JLabel implements MouseListener {
     UserInfoLabel(){
-        //ImageIcon userLogo = new ImageIcon(getClass().getResource("/userlogo.jpg"));
+        //ImageIcon userLogo = new ImageIcon(getClass().getResource("src/main/java/com/medisafe/app/gui/user/userlogo.jpg"));
         //this.setIcon(userLogo);
         this.setOpaque(true);
         this.setBackground(Color.white);

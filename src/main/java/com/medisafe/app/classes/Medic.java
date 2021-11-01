@@ -1,8 +1,10 @@
 package com.medisafe.app.classes;
 
 import com.medisafe.app.exceptions.DateException;
+import com.medisafe.app.exceptions.InvalidMedicException;
 import com.medisafe.app.exceptions.MedicException;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -12,7 +14,8 @@ public class Medic extends User
     //Author: Bogoslov Ion-Gabriel
 
     //variables
-    private Appointment appointments[] = new Appointment[256];
+    private ArrayList<Appointment> appointments = new ArrayList<Appointment>();
+    private ArrayList<Appointment> patientAppointments = new ArrayList<Appointment>();
 
     //constructors
     public Medic(int id, String username, String email, String fname, String lname, String password, boolean medic)
@@ -30,29 +33,57 @@ public class Medic extends User
     }
     
     //get, set, toString, equals
-    public Appointment[] getAppointments()
+    public ArrayList<Appointment> getAppointments()
     {
         return appointments;
     }
 
-    public void setAppointments(Appointment[] appointments)
+    public void setAppointments(ArrayList<Appointment> appointments)
     {
         this.appointments = appointments;
     }
 
+    public Appointment getAppointmentElement(int i)
+    {
+        return appointments.get(i);
+    }
+
+    public void setAppointmentElement(Appointment appointment, int i)
+    {
+        appointments.set(i, appointment);
+    }
+
+    // ------------------------------------------- //
+    
+    public ArrayList<Appointment> getPatientAppointments()
+    {
+        return patientAppointments;
+    }
+
+    public void setPatientAppointments(ArrayList<Appointment> patientAppointments)
+    {
+        this.patientAppointments = patientAppointments;
+    }
+
+    public Appointment getPatientAppointmentElement(int i)
+    {
+        return patientAppointments.get(i);
+    }
+
+    public void setPatientAppointmentElement(Appointment appointment, int i)
+    {
+        patientAppointments.set(i, appointment);
+    }
+    
     @Override
     public String toString()
     {
         return "Medic{" +
             "id=" + getId() +
-            ", username='" + getUsername() + '\'' +
-            ", email='" + getEmail() + '\'' +
+            ", username ='" + getUsername() +'\'' +
             ", fname='" + getFname() + '\'' +
             ", lname='" + getLname() + '\'' +
-            ", password='" + getPassword() + '\'' +
-            ", medic=" + isMedic() +
-            "appointments=" + Arrays.toString(appointments) +
-            '}';
+            ", email='" + getEmail();
     }
 
     @Override
@@ -72,16 +103,31 @@ public class Medic extends User
     }
     
     //other methods
-    public int createAppointment(Medic selection, int year, int day, int month) throws DateException, MedicException
+    public int createAppointment(int mid, int year, int day, int month) throws DateException, MedicException, InvalidMedicException
     {
+        Medic selection = null;
+        boolean ok = false;
+
+        //check if medic makes appointment with himself
+        if(mid == getId())
+            throw new MedicException();
+
+        //check if medic id is valid
+        for(int i = 0; i < MedicPatientList.getMedicVector().size(); ++i)
+            if(mid == MedicPatientList.getMedicElement(i).getId())
+            {
+                ok = true;
+                selection = MedicPatientList.getMedicElement(i);
+                break;
+            }
+
+        if(!ok)
+            throw new InvalidMedicException();
+
         Calendar date = new GregorianCalendar();
         date.set(year, day, month);
 
-        Appointment list[] = selection.getAppointments();
-        
-        //check if medic makes appointment with himself
-        if(equals(selection))
-            throw new MedicException();
+        ArrayList<Appointment> list = selection.getPatientAppointments();
 
         //check if date is actually valid
         if(month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12)
@@ -109,30 +155,26 @@ public class Medic extends User
             return 0;
 
         //check if medic has no set appointment for that date
-        for(int i = 0; i < list.length; ++i)
+        for(int i = 0; i < list.size(); ++i)
         {
-            if(list[i].getDay() == day && list[i].getMonth() == month)
+            if(list.get(i).getDay() == day && list.get(i).getMonth() == month)
             {
                 return 0;
             }
         }
 
-        //create appointment if medic is free
-        list[list.length] = new Appointment(getId(), selection.getId(), year, month, day);
+        //create appointment if medic is free, set it in his patient appointment list
+        list.add(new Appointment(getId(), selection.getId(), year, month, day));
         selection.setAppointments(list);
 
         //set the appointment for the patient aswell
-        appointments[appointments.length] = list[list.length - 1];
+        appointments.add(list.get(list.size() - 1));
 
         return 1;
     }
     
-    public void verifyAppointment(int i)
+    public void removeAppointment(int i)
     {
-        //deletes appointment
-        for(int j = i; j < appointments.length; ++j)
-        {
-            appointments[j] = appointments[j + 1];
-        }
+        patientAppointments.remove(i);
     }
 }

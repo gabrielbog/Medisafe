@@ -85,10 +85,11 @@ public class UserFrame extends JFrame {
         text1Label.setBounds(15, 125, 400, 15);
         
         //replaced appointmentslabel with a list + scrollpane
-        appointmentsList = new JList(MedicPatientList.getCurrentPatient().getAppointments());
+        appointmentsList = new JList(MedicPatientList.getCurrentPatient().getAppointments().toArray());
         appointmentsList.setOpaque(true);
         appointmentsList.setBackground(new Color(36, 37, 38));
         appointmentsList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        appointmentsList.setForeground(Color.WHITE);
         
         appointmentsScroll = new JScrollPane(appointmentsList);
         appointmentsScroll.setBounds(15, 145, 400, 540);

@@ -1,6 +1,48 @@
 package com.medisafe.app.threads;
 
-public class HourThread
+import javax.swing.*;
+
+public class HourThread extends Thread
 {
-    //todo
+    private JLabel label;
+    
+    private int second = 0;
+    private int minute = 0;
+    private int hour = 0;
+    
+    public HourThread(JLabel label)
+    {
+        this.label = label;
+    }
+
+    @Override
+    public void run()
+    {
+        while(true)
+        {
+            try
+            {
+                second++;
+                if(second > 60)
+                {
+                    second = 0;
+                    minute++;
+                    if(hour > 60)
+                    {
+                        hour++;
+                        if(hour > 24)
+                        {
+                            hour = 0;
+                        }
+                    }
+                }
+                label.setText(hour + ": " + minute + ": " + second);
+                Thread.sleep(1000);
+            }
+            catch (InterruptedException e)
+            {
+                e.printStackTrace();
+            }
+        }
+    }
 }

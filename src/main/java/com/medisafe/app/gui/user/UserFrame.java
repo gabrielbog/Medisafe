@@ -56,7 +56,7 @@ public class UserFrame extends JFrame {
         topLabel.add(titleLabel);
         topLabel.add(userInfoLabel);
         
-        if (MedicPatientList.getCurrentPatient().getLname().equals("") || MedicPatientList.getCurrentPatient().getLname().equals("")){
+        if (MedicPatientList.getCurrentPatient().getFname() == null || MedicPatientList.getCurrentPatient().getLname() == null){
             warningLabel = new JLabel("    WARNING: We need more informations about you. Press here or in the top right corner to complete your registration.");
             warningLabel.setOpaque(true);
             warningLabel.setBackground(new Color(152, 100, 0));

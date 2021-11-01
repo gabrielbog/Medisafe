@@ -1,58 +1,63 @@
 package com.medisafe.app.classes;
 
+import java.util.ArrayList;
+
 public abstract class MedicPatientList
 {
     //Author: Bogoslov Ion-Gabriel
     
     //variables
+    
+    /*
     private static Patient patientVector[] = new Patient[256];
     private static Medic medicVector[] = new Medic[256];
+    */
     
-    private static int patientIndex = 0;
-    private static int medicIndex = 0;
+    private static ArrayList<Patient> patientVector = new ArrayList<Patient>();
+    private static ArrayList<Medic> medicVector = new ArrayList<Medic>();
     
     private static Patient currentPatient = null;
     private static Medic currentMedic = null;
     
     //get, set
-    public static Patient[] getPatientVector()
+    public static ArrayList<Patient> getPatientVector()
     {
         return patientVector;
     }
 
-    public static void setPatientVector(Patient[] patientVector)
+    public static void setPatientVector(ArrayList<Patient> patientVector)
     {
         MedicPatientList.patientVector = patientVector;
     }
+    
+    public static Patient getPatientElement(int i)
+    {
+        return patientVector.get(i);
+    }
+    
+    public static void setPatientElement(Patient patient, int i)
+    {
+        MedicPatientList.patientVector.set(i, patient);
+    }
 
-    public static Medic[] getMedicVector()
+    public static ArrayList<Medic> getMedicVector()
     {
         return medicVector;
     }
 
-    public static void setMedicVector(Medic[] medicVector)
+    public static void setMedicVector(ArrayList<Medic> medicVector)
     {
         MedicPatientList.medicVector = medicVector;
     }
 
-    public static int getPatientIndex()
+    public static Medic getMedicElement(int i)
     {
-        return patientIndex;
+        return medicVector.get(i);
     }
 
-    public static void setPatientIndex(int patientIndex)
+    public static void setMedicElement(Medic medic, int i)
     {
-        MedicPatientList.patientIndex = patientIndex;
-    }
-
-    public static int getMedicIndex()
-    {
-        return medicIndex;
-    }
-
-    public static void setMedicIndex(int medicIndex){
-        
-        MedicPatientList.medicIndex = medicIndex;
+        MedicPatientList.medicVector.set(i, medic);
     }
 
     public static Patient getCurrentPatient()
@@ -75,60 +80,60 @@ public abstract class MedicPatientList
         MedicPatientList.currentMedic = currentMedic;
     }
 
+    
+    
+    
+    
     //other methods
     public static void addPatient(int id, String username, String email, String fname, String lname, String password, boolean medic)
     {
-        patientVector[patientIndex] = new Patient(id, username, email, fname, lname, password, medic);
-        patientIndex++;
+        patientVector.add(new Patient(id, username, email, fname, lname, password, medic));
     }
     
     public static void addPatient(int id, String username, String email, String password)
     {
-        patientVector[patientIndex] = new Patient(id, username, email, password);
-        patientIndex++;
+        patientVector.add(new Patient(id, username, email, password));
     }
     
     public static void addMedic(int id, String username, String email, String fname, String lname, String password, boolean medic)
     {
-        medicVector[medicIndex] = new Medic(id, username, email, fname, lname, password, medic);
-        medicIndex++;
+        medicVector.add(new Medic(id, username, email, fname, lname, password, medic));
     }
     
     public static void addMedic(int id, String username, String email, String password)
     {
-        medicVector[medicIndex] = new Medic(id, username, email, password);
-        medicIndex++;
+        medicVector.add(new Medic(id, username, email, password));
     }
     
     public static int verifyUser(String username, String password)
     {
-        for(int i = 0; i < patientVector.length; ++i)
-            if(patientVector[i] != null && username.equals(patientVector[i].getUsername()) && password.equals(patientVector[i].getPassword()))
+        for(int i = 0; i < patientVector.size(); ++i)
+            if(patientVector.get(i) != null && username.equals(patientVector.get(i).getUsername()) && password.equals(patientVector.get(i).getPassword()))
             {
-                currentPatient = patientVector[i];
+                currentPatient = patientVector.get(i);
                 currentMedic = null;
                 return 1;
             }
 
-        for(int i = 0; i < medicVector.length; ++i)
-            if(medicVector[i] != null && username.equals(medicVector[i].getUsername()) && password.equals(medicVector[i].getPassword()))
+        for(int i = 0; i < medicVector.size(); ++i)
+            if(medicVector.get(i) != null && username.equals(medicVector.get(i).getUsername()) && password.equals(medicVector.get(i).getPassword()))
             {
                 currentPatient = null;
-                currentMedic = medicVector[i];
+                currentMedic = medicVector.get(i);
                 return 2;
             }
-            
+        
         return 0;
     }
     
     public static int verifyNewUser(String username, String email)
     {
-        for(int i = 0; i < patientVector.length; ++i)
-            if(patientVector[i] != null && (username.equals(patientVector[i].getUsername()) || email.equals(patientVector[i].getEmail())))
+        for(int i = 0; i < patientVector.size(); ++i)
+            if(patientVector.get(i) != null && (username.equals(patientVector.get(i).getUsername()) || email.equals(patientVector.get(i).getEmail())))
                 return 0;
 
-        for(int i = 0; i < medicVector.length; ++i)
-            if(medicVector[i] != null && (username.equals(medicVector[i].getUsername()) || email.equals(medicVector[i].getEmail())))
+        for(int i = 0; i < medicVector.size(); ++i)
+            if(medicVector.get(i) != null && (username.equals(medicVector.get(i).getUsername()) || email.equals(medicVector.get(i).getEmail())))
                 return 0;
 
         return 1;
@@ -138,9 +143,9 @@ public abstract class MedicPatientList
     {
         int latestPatientId = 0;
         
-        for(int i = 0; i < patientVector.length; ++i)
-            if(patientVector[i] != null)
-                latestPatientId = patientVector[i].getId();
+        for(int i = 0; i < patientVector.size(); ++i)
+            if(patientVector.get(i) != null)
+                latestPatientId = patientVector.get(i).getId();
             
         return latestPatientId;
     }
@@ -149,32 +154,49 @@ public abstract class MedicPatientList
     {
         int latestMedicId = 0;
         
-        for(int i = 0; i < medicVector.length; ++i)
-            if(medicVector[i] != null)
-                latestMedicId = medicVector[i].getId();
+        for(int i = 0; i < medicVector.size(); ++i)
+            if(medicVector.get(i) != null)
+                latestMedicId = medicVector.get(i).getId();
             
         return latestMedicId;
+    }
+    
+    public static void convertPatientToMedic()
+    {
+        //convert patient to medic
+        currentMedic = new Medic(MedicPatientList.getLatestMedicId(), currentPatient.getUsername(), currentPatient.getEmail(),
+                                currentPatient.getFname(), currentPatient.getLname(), currentPatient.getPassword(), true);
+        currentMedic.setAppointments(currentPatient.getAppointments()); //dont forget to copy the appointments too
+        medicVector.add(currentMedic);
+        
+        //remove patient from vector
+        patientVector.remove(currentPatient);
+        currentPatient.setAppointments(null);
+        currentPatient = null;
+        
+        //remove said patient from the database, add the new medic in the database
+        //here
     }
     
     //debug stuff
     public static void patientShow()
     {
-        for(int i = 0; i < patientVector.length; ++i)
+        for(int i = 0; i < patientVector.size(); ++i)
         {
-            if(patientVector[i] != null)
+            if(patientVector.get(i) != null)
             {
-                System.out.println(patientVector[i].toString());
+                System.out.println(patientVector.get(i).toString());
             }
         }
     }
 
     public static void medicShow()
     {
-        for(int i = 0; i < medicVector.length; ++i)
+        for(int i = 0; i < medicVector.size(); ++i)
         {
-            if(medicVector[i] != null)
+            if(medicVector.get(i) != null)
             {
-                System.out.println(medicVector[i].toString());
+                System.out.println(medicVector.get(i).toString());
             }
         }
     }

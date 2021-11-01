@@ -84,6 +84,9 @@ public class Application
 
         while (users.next())
         {
+            int patientIndex = 0;
+            int medicIndex = 0;
+            
             int id = users.getInt("id");
             String username = users.getString("username");
             String email = users.getString("email");
@@ -93,9 +96,71 @@ public class Application
             boolean medic = users.getBoolean("medic");
             
             if(medic == false)
+            {
                 MedicPatientList.addPatient(id, username, email, fname, lname, password, medic);
+                statement = this.connection.getConn().createStatement();
+                ResultSet appointments = statement.executeQuery("SELECT * FROM appointments");
+
+                while (appointments.next())
+                {
+                    int appointmentsId     = appointments.getInt("id");
+                    int mid    = appointments.getInt("mid");
+                    int uid    = appointments.getInt("uid");
+                    int day    = appointments.getInt("day");
+                    int mounth = appointments.getInt("mounth");
+                    int year   = appointments.getInt("year");
+
+                    if(uid == id)
+                    {
+                        //System.out.println(MedicPatientList.getPatientElement(patientIndex));
+                            
+                        Appointment tmp = new Appointment(uid, mid, day, mounth, year);
+                        MedicPatientList.getPatientElement(patientIndex).getAppointments().add(tmp);
+                    }
+                    
+                    System.out.println(patientIndex);
+                }
+                
+                patientIndex++;
+            }
+            
             else
+            {
                 MedicPatientList.addMedic(id, username, email, fname, lname, password, medic);
+                statement = this.connection.getConn().createStatement();
+                ResultSet appointments = statement.executeQuery("SELECT * FROM appointments");
+
+                while (appointments.next())
+                {
+                    int appointmentsId     = appointments.getInt("id");
+                    int mid    = appointments.getInt("mid");
+                    int uid    = appointments.getInt("uid");
+                    int day    = appointments.getInt("day");
+                    int mounth = appointments.getInt("mounth");
+                    int year   = appointments.getInt("year");
+                    
+                    if(uid == id)
+                    {
+                        //System.out.println(MedicPatientList.getMedicElement(medicIndex));
+                        
+                        //medic's own appointments
+                        Appointment tmp = new Appointment(uid, mid, day, mounth, year);
+                        MedicPatientList.getMedicElement(medicIndex).getAppointments().add(tmp);
+                    }
+                    if(mid == id)
+                    {
+                        //System.out.println(MedicPatientList.getMedicElement(medicIndex));
+                        
+                        //appointments created by other patients with the same medic
+                        Appointment tmp = new Appointment(uid, mid, day, mounth, year);
+                        MedicPatientList.getMedicElement(medicIndex).getPatientAppointments().add(tmp);
+                    }
+                    
+                    System.out.println(medicIndex);
+                }
+                
+                medicIndex++;
+            }
         }
         
         System.out.println("Database loaded!");
@@ -115,7 +180,7 @@ public class Application
         //SignUpFrame.signUpFrame = new SignUpFrame();
         //UserFrame.userFrame = new UserFrame();
         //insert_appointments(1, 4, 1, 1, 2001);
-        load_appointments();
+        //load_appointments();
     }
 
     /**

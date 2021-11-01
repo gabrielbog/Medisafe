@@ -36,7 +36,7 @@ public class UserInfoFrame extends JFrame {
         userInfoLabel.setOpaque(true);
         userInfoLabel.setBackground(new Color(28, 30, 33));
         
-        if (MedicPatientList.getCurrentPatient().getFname().equals("")){
+        if (MedicPatientList.getCurrentPatient().getFname() == null){
             firstNameLabel = new JLabel("First name: ");
             firstNameLabel.setForeground(Color.white);
             firstNameLabel.setFont(new Font("Arial", Font.PLAIN, 14));
@@ -72,7 +72,7 @@ public class UserInfoFrame extends JFrame {
             userInfoLabel.add(firstNameLabel);
         }
 
-        if (MedicPatientList.getCurrentPatient().getLname().equals("")){
+        if (MedicPatientList.getCurrentPatient().getLname() == null){
             lastNameLabel = new JLabel("Last name: ");
             lastNameLabel.setForeground(Color.white);
             lastNameLabel.setFont(new Font("Arial", Font.PLAIN, 14));
@@ -100,7 +100,7 @@ public class UserInfoFrame extends JFrame {
             userInfoLabel.add(lastNameLabel);
             userInfoLabel.add(addLastNameButton);
         }else{
-            firstNameLabel = new JLabel("Last name: " + MedicPatientList.getCurrentPatient().getFname());
+            firstNameLabel = new JLabel("Last name: " + MedicPatientList.getCurrentPatient().getLname());
             firstNameLabel.setForeground(Color.white);
             firstNameLabel.setFont(new Font("Arial", Font.PLAIN, 14));
             firstNameLabel.setBounds(15, 45, 120, 15);

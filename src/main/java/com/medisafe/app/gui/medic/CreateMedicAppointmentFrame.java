@@ -1,16 +1,17 @@
-package com.medisafe.app.gui.user;
+package com.medisafe.app.gui.medic;
 
 import com.medisafe.app.classes.MedicPatientList;
 import com.medisafe.app.exceptions.DateException;
 import com.medisafe.app.exceptions.InvalidMedicException;
+import com.medisafe.app.exceptions.MedicException;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class CreateAppointmentFrame extends JFrame {
-    public static CreateAppointmentFrame createAppointmentFrame;
+public class CreateMedicAppointmentFrame extends JFrame {
+    public static CreateMedicAppointmentFrame createAppointmentFrame;
     
     JLabel mainLabel;
     
@@ -26,7 +27,7 @@ public class CreateAppointmentFrame extends JFrame {
     
     JButton finishButton;
     
-    CreateAppointmentFrame(){
+    CreateMedicAppointmentFrame(){
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setResizable(false);
         this.setTitle("Medisafe");
@@ -89,7 +90,7 @@ public class CreateAppointmentFrame extends JFrame {
                 {
                     try
                     {
-                        MedicPatientList.getCurrentPatient().createAppointment(MedicPatientList.getMedicElement(medicList.getSelectedIndex()).getId(), Integer.parseInt(yearTextField.getText()), Integer.parseInt(dayTextField.getText()), Integer.parseInt(monthTextField.getText()));
+                        MedicPatientList.getCurrentMedic().createAppointment(MedicPatientList.getMedicElement(medicList.getSelectedIndex()).getId(), Integer.parseInt(yearTextField.getText()), Integer.parseInt(dayTextField.getText()), Integer.parseInt(monthTextField.getText()));
 
                         JOptionPane.showMessageDialog(null, "Appointment successfully created!", "Success!", JOptionPane.INFORMATION_MESSAGE);
                         //add appointment in the database
@@ -104,6 +105,11 @@ public class CreateAppointmentFrame extends JFrame {
                     catch (InvalidMedicException ex)
                     {
                         JOptionPane.showMessageDialog(null, "Invalid Medic", "Error", JOptionPane.ERROR_MESSAGE);
+                        ex.printStackTrace();
+                    }
+                    catch (MedicException ex)
+                    {
+                        JOptionPane.showMessageDialog(null, "You can't create an appointment with yourself", "Error", JOptionPane.ERROR_MESSAGE);
                         ex.printStackTrace();
                     }
                 }

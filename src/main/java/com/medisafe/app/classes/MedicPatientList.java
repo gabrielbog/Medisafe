@@ -164,7 +164,7 @@ public abstract class MedicPatientList
     public static void convertPatientToMedic()
     {
         //convert patient to medic
-        currentMedic = new Medic(MedicPatientList.getLatestMedicId(), currentPatient.getUsername(), currentPatient.getEmail(),
+        currentMedic = new Medic(MedicPatientList.getLatestMedicId() + 1, currentPatient.getUsername(), currentPatient.getEmail(),
                                 currentPatient.getFname(), currentPatient.getLname(), currentPatient.getPassword(), true);
         currentMedic.setAppointments(currentPatient.getAppointments()); //dont forget to copy the appointments too
         medicVector.add(currentMedic);

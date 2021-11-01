@@ -1,6 +1,8 @@
 package com.medisafe.app.gui.user;
 
 import com.medisafe.app.classes.MedicPatientList;
+import com.medisafe.app.threads.HourThread;
+import com.medisafe.app.threads.TimerThread;
 
 import javax.swing.*;
 import java.awt.*;
@@ -20,8 +22,7 @@ public class UserFrame extends JFrame {
     JLabel warningLabel;
     
     JLabel text1Label;
-    //JLabel appointmentsLabel;
-    JList appointmentsList;
+    public static JList appointmentsList;
     JScrollPane appointmentsScroll;
     
     CreateAppointmentLabel createAppointmentLabel;
@@ -29,6 +30,9 @@ public class UserFrame extends JFrame {
     JLabel text2Label;
     
     JLabel feedLabel;
+    
+    private static JLabel timerLabel;
+    private static JLabel hourLabel;
     
     public UserFrame(){
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -39,7 +43,7 @@ public class UserFrame extends JFrame {
         userLabel.setLayout(null);
         userLabel.setOpaque(true);
         userLabel.setBackground(new Color(28, 30, 33));
-        userLabel.setPreferredSize(new Dimension(1245, 700));
+        userLabel.setPreferredSize(new Dimension(1245, 720));
         
         topLabel = new JLabel();
         topLabel.setBounds(0, 0, 1245, 50);
@@ -106,6 +110,22 @@ public class UserFrame extends JFrame {
         feedLabel.setOpaque(true);
         feedLabel.setBackground(new Color(36, 37, 38));
         feedLabel.setBounds(430, 240, 800, 445);
+
+        timerLabel = new JLabel();
+        timerLabel.setForeground(Color.white);
+        timerLabel.setFont(new Font("Arial", Font.PLAIN, 18));
+        timerLabel.setBounds(15, 700, 800, 15);
+
+        hourLabel = new JLabel();
+        hourLabel.setForeground(Color.white);
+        hourLabel.setFont(new Font("Arial", Font.PLAIN, 18));
+        hourLabel.setBounds(155, 700, 800, 15);
+
+        HourThread hourThread = new HourThread(hourLabel);
+        TimerThread timerThread = new TimerThread(timerLabel);
+        
+        hourThread.start();
+        timerThread.start();
         
         userLabel.add(topLabel);
         userLabel.add(text1Label);
@@ -113,6 +133,8 @@ public class UserFrame extends JFrame {
         userLabel.add(createAppointmentLabel);
         userLabel.add(text2Label);
         userLabel.add(feedLabel);
+        userLabel.add(hourLabel);
+        userLabel.add(timerLabel);
 
         System.out.println();
         

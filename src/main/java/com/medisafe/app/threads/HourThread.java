@@ -1,15 +1,16 @@
 package com.medisafe.app.threads;
 
 import javax.swing.*;
+import java.util.Calendar;
 
 public class HourThread extends Thread
 {
     private JLabel label;
-    
-    private int second = 0;
-    private int minute = 0;
-    private int hour = 0;
-    
+
+    private int second = Calendar.getInstance().get(Calendar.SECOND);
+    private int minute = Calendar.getInstance().get(Calendar.MINUTE);
+    private int hour = Calendar.getInstance().get(Calendar.HOUR);
+
     public HourThread(JLabel label)
     {
         this.label = label;
@@ -22,21 +23,11 @@ public class HourThread extends Thread
         {
             try
             {
-                second++;
-                if(second > 60)
-                {
-                    second = 0;
-                    minute++;
-                    if(hour > 60)
-                    {
-                        hour++;
-                        if(hour > 24)
-                        {
-                            hour = 0;
-                        }
-                    }
-                }
-                label.setText(hour + ": " + minute + ": " + second);
+                second = Calendar.getInstance().get(Calendar.SECOND);
+                minute = Calendar.getInstance().get(Calendar.MINUTE);
+                hour = Calendar.getInstance().get(Calendar.HOUR);
+                
+                label.setText("Time: " + hour + ": " + minute + ": " + second);
                 Thread.sleep(1000);
             }
             catch (InterruptedException e)

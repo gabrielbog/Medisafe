@@ -80,7 +80,7 @@ public class Patient extends User
     }
 
     //other methods
-    public int createAppointment(int mid, int year, int day, int month) throws DateException, InvalidMedicException
+    public void createAppointment(int mid, int year, int day, int month) throws DateException, InvalidMedicException
     {
         Medic selection = null;
         boolean ok = false;
@@ -122,17 +122,15 @@ public class Patient extends User
             else if(day < 0 || day > 28)
                 throw new DateException();
         }
-        
-        //check if selected date is weekend
-        if(date.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY || date.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY)
-            return 0;
+        else
+            throw new DateException();
         
         //check if medic has no set appointment for that date
         for(int i = 0; i < list.size(); ++i)
         {
             if(list.get(i).getDay() == day && list.get(i).getMonth() == month)
             {
-                return 0;
+                throw new DateException();
             }
         }
         
@@ -142,7 +140,5 @@ public class Patient extends User
         
         //set the appointment for the patient aswell
         appointments.add(list.get(list.size() - 1));
-        
-        return 1;
     }
 }

@@ -3,6 +3,7 @@ package com.medisafe.app.gui.user;
 import com.medisafe.app.classes.Medic;
 import com.medisafe.app.classes.MedicPatientList;
 import com.medisafe.app.classes.Patient;
+import com.medisafe.app.gui.medic.MedicFrame;
 
 import javax.swing.*;
 import java.awt.*;
@@ -132,8 +133,9 @@ public class UserInfoFrame extends JFrame {
                 } else {
                     int becomeMedic = JOptionPane.showConfirmDialog(null, "Are you sure you want to become a medic", "Medisafe", JOptionPane.YES_NO_OPTION);
                     if (becomeMedic == JOptionPane.YES_OPTION) {
-                        // UserFrame.userFrame.dispose();
-                        //MedicFrame.medicFrame = new MedicFrame;
+                        MedicPatientList.convertPatientToMedic();
+                        UserFrame.userFrame.dispose();
+                        MedicFrame.medicFrame = new MedicFrame();
                     }
                 }
             }

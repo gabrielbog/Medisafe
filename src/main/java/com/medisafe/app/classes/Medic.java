@@ -3,13 +3,14 @@ package com.medisafe.app.classes;
 import com.medisafe.app.exceptions.DateException;
 import com.medisafe.app.exceptions.InvalidMedicException;
 import com.medisafe.app.exceptions.MedicException;
+import com.medisafe.app.interfaces.IMedic;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-public class Medic extends User
+public class Medic extends User implements IMedic
 {
     //Author: Bogoslov Ion-Gabriel
 
@@ -78,8 +79,7 @@ public class Medic extends User
     @Override
     public String toString()
     {
-        return "Medic{" +
-            "id=" + getId() +
+        return "id=" + getId() +
             ", username ='" + getUsername() +'\'' +
             ", fname='" + getFname() + '\'' +
             ", lname='" + getLname() + '\'' +
@@ -103,7 +103,7 @@ public class Medic extends User
     }
     
     //other methods
-    public int createAppointment(int mid, int year, int day, int month) throws DateException, MedicException, InvalidMedicException
+    public void createAppointment(int mid, int year, int day, int month) throws DateException, MedicException, InvalidMedicException
     {
         Medic selection = null;
         boolean ok = false;
@@ -149,17 +149,15 @@ public class Medic extends User
             else if(day < 0 || day > 28)
                 throw new DateException();
         }
-
-        //check if selected date is weekend
-        if(date.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY || date.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY)
-            return 0;
+        else
+            throw new DateException();
 
         //check if medic has no set appointment for that date
         for(int i = 0; i < list.size(); ++i)
         {
             if(list.get(i).getDay() == day && list.get(i).getMonth() == month)
             {
-                return 0;
+                throw new DateException();
             }
         }
 
@@ -169,8 +167,6 @@ public class Medic extends User
 
         //set the appointment for the patient aswell
         appointments.add(list.get(list.size() - 1));
-
-        return 1;
     }
     
     public void removeAppointment(int i)

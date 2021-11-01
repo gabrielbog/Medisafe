@@ -22,7 +22,7 @@ public class MedicInfoFrame extends JFrame {
     JLabel emailLabel;
     
     MedicInfoFrame(){
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setTitle("Medisafe");
         this.setResizable(false);
         

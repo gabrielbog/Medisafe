@@ -82,11 +82,11 @@ public class Application
         Statement statement = this.connection.getConn().createStatement();
         ResultSet users = statement.executeQuery("SELECT * FROM users");
 
+        int patientIndex = 0;
+        int medicIndex = 0;
+        
         while (users.next())
         {
-            int patientIndex = 0;
-            int medicIndex = 0;
-            
             int id = users.getInt("id");
             String username = users.getString("username");
             String email = users.getString("email");
@@ -114,7 +114,7 @@ public class Application
                     {
                         //System.out.println(MedicPatientList.getPatientElement(patientIndex));
                             
-                        Appointment tmp = new Appointment(uid, mid, day, mounth, year);
+                        Appointment tmp = new Appointment(uid, mid, year, mounth, day);
                         MedicPatientList.getPatientElement(patientIndex).getAppointments().add(tmp);
                     }
                     
@@ -144,7 +144,7 @@ public class Application
                         //System.out.println(MedicPatientList.getMedicElement(medicIndex));
                         
                         //medic's own appointments
-                        Appointment tmp = new Appointment(uid, mid, day, mounth, year);
+                        Appointment tmp = new Appointment(uid, mid, year, mounth, day);
                         MedicPatientList.getMedicElement(medicIndex).getAppointments().add(tmp);
                     }
                     if(mid == id)
@@ -152,7 +152,7 @@ public class Application
                         //System.out.println(MedicPatientList.getMedicElement(medicIndex));
                         
                         //appointments created by other patients with the same medic
-                        Appointment tmp = new Appointment(uid, mid, day, mounth, year);
+                        Appointment tmp = new Appointment(uid, mid, year, mounth, day);
                         MedicPatientList.getMedicElement(medicIndex).getPatientAppointments().add(tmp);
                     }
                     

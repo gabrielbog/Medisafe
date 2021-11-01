@@ -1,6 +1,8 @@
-package com.medisafe.app.gui.user;
+package com.medisafe.app.gui.medic;
 
+import com.medisafe.app.classes.Appointment;
 import com.medisafe.app.classes.MedicPatientList;
+import com.medisafe.app.gui.medic.MedicFrame;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,9 +11,9 @@ import java.awt.event.MouseListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-public class CreateAppointmentLabel extends JLabel implements MouseListener {
+public class CreateMedicAppointmentLabel extends JLabel implements MouseListener {
     
-    public CreateAppointmentLabel(){
+    public CreateMedicAppointmentLabel(){
         this.setOpaque(true);
         this.setBackground(new Color(36, 37, 38));
         this.setFont(new Font("Arial", Font.PLAIN, 18));
@@ -23,11 +25,12 @@ public class CreateAppointmentLabel extends JLabel implements MouseListener {
     
     @Override
     public void mouseClicked(MouseEvent e) {
-        CreateAppointmentFrame.createAppointmentFrame = new CreateAppointmentFrame();
-        CreateAppointmentFrame.createAppointmentFrame.addWindowListener(new WindowAdapter() {
+        CreateMedicAppointmentFrame.createAppointmentFrame = new CreateMedicAppointmentFrame();
+        CreateMedicAppointmentFrame.createAppointmentFrame.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosed(WindowEvent e) {
-                UserFrame.appointmentsList.setListData(MedicPatientList.getCurrentPatient().getAppointments().toArray());
+                MedicFrame.appointmentsList.setListData(MedicPatientList.getCurrentMedic().getAppointments().toArray());
+                MedicFrame.patientAppointmentsList.setListData(MedicPatientList.getCurrentMedic().getPatientAppointments().toArray());
             }
         });
     }

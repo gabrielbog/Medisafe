@@ -110,6 +110,8 @@ public class SignUpFrame extends JFrame {
                     if(verify == 1)
                     {
                         MedicPatientList.addPatient(MedicPatientList.getLatestPatientId() + 1, username, email, password);
+                        MedicPatientList.setCurrentPatient(MedicPatientList.getPatientVector().get(MedicPatientList.getPatientVector().size() - 1));
+                        
                         //save on database in case
                         
                         username = null;

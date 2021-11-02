@@ -30,7 +30,7 @@ public class MedicInfoFrame extends JFrame {
         medicInfoLabel.setLayout(null);
         medicInfoLabel.setPreferredSize(new Dimension(350, 280));
         medicInfoLabel.setOpaque(true);
-        medicInfoLabel.setBackground(new Color(28, 30, 33));
+        medicInfoLabel.setBackground(UserFrame.Colors.BACKGROUND);
         
         firstNameLabel = new JLabel("First name: " + MedicPatientList.getCurrentMedic().getFname());
         firstNameLabel.setForeground(Color.white);

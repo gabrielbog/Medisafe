@@ -46,16 +46,16 @@ public class MedicFrame extends JFrame {
         medicLabel = new JLabel();
         medicLabel.setLayout(null);
         medicLabel.setOpaque(true);
-        medicLabel.setBackground(new Color(28, 30, 33));
+        medicLabel.setBackground(UserFrame.Colors.BACKGROUND);
         medicLabel.setPreferredSize(new Dimension(1245, 750));
 
         topLabel = new JLabel();
         topLabel.setBounds(0, 0, 1245, 50);
         topLabel.setOpaque(true);
-        topLabel.setBackground(new Color(36, 37, 38));
+        topLabel.setBackground(UserFrame.Colors.INNERBACKGROUND);
 
         titleLabel = new JLabel("MEDISAFE");
-        titleLabel.setForeground(new Color(204, 44, 44));
+        titleLabel.setForeground(UserFrame.Colors.RED);
         titleLabel.setFont(new Font("Arial", Font.BOLD, 26));
         titleLabel.setBounds(15, 15, 320, 20);
 
@@ -71,7 +71,7 @@ public class MedicFrame extends JFrame {
         
         appointmentsList = new JList(MedicPatientList.getCurrentMedic().getAppointments().toArray());
         appointmentsList.setOpaque(true);
-        appointmentsList.setBackground(new Color(36, 37, 38));
+        appointmentsList.setBackground(UserFrame.Colors.INNERBACKGROUND);
         appointmentsList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         appointmentsList.setForeground(Color.WHITE);
 
@@ -87,7 +87,7 @@ public class MedicFrame extends JFrame {
 
         feedLabel = new JLabel();
         feedLabel.setOpaque(true);
-        feedLabel.setBackground(new Color(36, 37, 38));
+        feedLabel.setBackground(UserFrame.Colors.INNERBACKGROUND);
         feedLabel.setBounds(430, 240, 800, 245);
 
         text3Label = new JLabel("Patient appointments");
@@ -97,7 +97,7 @@ public class MedicFrame extends JFrame {
 
         patientAppointmentsList = new JList(MedicPatientList.getCurrentMedic().getPatientAppointments().toArray());
         patientAppointmentsList.setOpaque(true);
-        patientAppointmentsList.setBackground(new Color(36, 37, 38));
+        patientAppointmentsList.setBackground(UserFrame.Colors.INNERBACKGROUND);
         patientAppointmentsList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         patientAppointmentsList.setForeground(Color.WHITE);
 

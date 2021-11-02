@@ -34,13 +34,13 @@ public class CreateAppointmentFrame extends JFrame {
         mainLabel = new JLabel();
         mainLabel.setLayout(null);
         mainLabel.setOpaque(true);
-        mainLabel.setBackground(new Color(28, 30, 33));
+        mainLabel.setBackground(UserFrame.Colors.BACKGROUND);
         mainLabel.setPreferredSize(new Dimension(500, 300));
 
         
         medicList = new JList(MedicPatientList.getMedicVector().toArray());
         medicList.setOpaque(true);
-        medicList.setBackground(new Color(36, 37, 38));
+        medicList.setBackground(UserFrame.Colors.INNERBACKGROUND);
         medicList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         medicList.setForeground(Color.WHITE);
 
@@ -73,7 +73,7 @@ public class CreateAppointmentFrame extends JFrame {
 
         finishButton = new JButton();
         finishButton.setText("Create");
-        finishButton.setBackground(new Color(204, 44, 44));
+        finishButton.setBackground(UserFrame.Colors.RED);
         finishButton.setForeground(Color.white);
         finishButton.setFont(new Font("Arial", Font.BOLD, 16));
         finishButton.setBounds(315, 250, 150, 35);

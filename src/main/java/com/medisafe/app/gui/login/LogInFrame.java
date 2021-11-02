@@ -40,10 +40,10 @@ public class LogInFrame extends JFrame {
         logInPanel = new JPanel();
         logInPanel.setLayout(null);
         logInPanel.setPreferredSize(new Dimension(350, 280));
-        logInPanel.setBackground(new Color(28, 30, 33));
+        logInPanel.setBackground(UserFrame.Colors.BACKGROUND);
         
         titleLabel = new JLabel("MEDISAFE");
-        titleLabel.setForeground(new Color(204, 44, 44));
+        titleLabel.setForeground(UserFrame.Colors.RED);
         titleLabel.setFont(new Font("Arial", Font.BOLD, 26));
         titleLabel.setBounds(15, 15, 320, 20);
         
@@ -75,7 +75,7 @@ public class LogInFrame extends JFrame {
         
         logInButton = new JButton();
         logInButton.setText("LOG IN");
-        logInButton.setBackground(new Color(204, 44, 44));
+        logInButton.setBackground(UserFrame.Colors.RED);
         logInButton.setForeground(Color.white);
         logInButton.setFont(new Font("Arial", Font.BOLD, 16));
         logInButton.setBounds(15, 210, 320, 30);

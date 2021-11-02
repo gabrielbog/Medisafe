@@ -38,7 +38,7 @@ public class UserInfoFrame extends JFrame {
         userInfoLabel.setLayout(null);
         userInfoLabel.setPreferredSize(new Dimension(350, 280));
         userInfoLabel.setOpaque(true);
-        userInfoLabel.setBackground(new Color(28, 30, 33));
+        userInfoLabel.setBackground(UserFrame.Colors.BACKGROUND);
         
         if (MedicPatientList.getCurrentPatient().getFname() == null){
             firstNameLabel = new JLabel("First name: ");
@@ -48,7 +48,7 @@ public class UserInfoFrame extends JFrame {
 
             addFirstNameButton = new JButton();
             addFirstNameButton.setText("Add first name");
-            addFirstNameButton.setBackground(new Color(204, 44, 44));
+            addFirstNameButton.setBackground(UserFrame.Colors.RED);
             addFirstNameButton.setForeground(Color.white);
             addFirstNameButton.setFont(new Font("Arial", Font.BOLD, 16));
             addFirstNameButton.setBounds(135, 15, 185, 15);
@@ -84,7 +84,7 @@ public class UserInfoFrame extends JFrame {
 
             addLastNameButton = new JButton();
             addLastNameButton.setText("Add last name");
-            addLastNameButton.setBackground(new Color(204, 44, 44));
+            addLastNameButton.setBackground(UserFrame.Colors.RED);
             addLastNameButton.setForeground(Color.white);
             addLastNameButton.setFont(new Font("Arial", Font.BOLD, 16));
             addLastNameButton.setBounds(135, 45, 185, 15);
@@ -121,7 +121,7 @@ public class UserInfoFrame extends JFrame {
         
         medicButton = new JButton();
         medicButton.setText("Become medic");
-        medicButton.setBackground(new Color(204, 44, 44));
+        medicButton.setBackground(UserFrame.Colors.RED);
         medicButton.setForeground(Color.white);
         medicButton.setFont(new Font("Arial", Font.BOLD, 16));
         medicButton.setBounds(15, 210, 320, 30);

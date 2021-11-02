@@ -13,7 +13,7 @@ public class CreateAppointmentLabel extends JLabel implements MouseListener {
     
     public CreateAppointmentLabel(){
         this.setOpaque(true);
-        this.setBackground(new Color(36, 37, 38));
+        this.setBackground(UserFrame.Colors.INNERBACKGROUND);
         this.setFont(new Font("Arial", Font.PLAIN, 18));
         this.setForeground(Color.white);
         this.setText("   Create appointment");    

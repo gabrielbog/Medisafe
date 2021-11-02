@@ -3,6 +3,7 @@ package com.medisafe.app.gui.medic;
 import com.medisafe.app.classes.Appointment;
 import com.medisafe.app.classes.MedicPatientList;
 import com.medisafe.app.gui.medic.MedicFrame;
+import com.medisafe.app.gui.user.UserFrame;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,7 +16,7 @@ public class CreateMedicAppointmentLabel extends JLabel implements MouseListener
     
     public CreateMedicAppointmentLabel(){
         this.setOpaque(true);
-        this.setBackground(new Color(36, 37, 38));
+        this.setBackground(UserFrame.Colors.INNERBACKGROUND);
         this.setFont(new Font("Arial", Font.PLAIN, 18));
         this.setForeground(Color.white);
         this.setText("   Create appointment");    

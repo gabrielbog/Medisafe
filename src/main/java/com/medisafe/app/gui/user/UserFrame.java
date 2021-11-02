@@ -10,6 +10,13 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class UserFrame extends JFrame {
+    public class Colors {
+        public static final Color BACKGROUND = new Color(28, 30, 33);
+        public static final Color INNERBACKGROUND = new Color(36, 37, 38);
+        public static final Color RED = new Color(204, 44, 44);
+        public static final Color YELLOW = new Color(152, 100, 0);
+    }
+    
     public static UserFrame userFrame;
     
     JLabel userLabel;
@@ -42,16 +49,16 @@ public class UserFrame extends JFrame {
         userLabel = new JLabel();
         userLabel.setLayout(null);
         userLabel.setOpaque(true);
-        userLabel.setBackground(new Color(28, 30, 33));
+        userLabel.setBackground(Colors.BACKGROUND);
         userLabel.setPreferredSize(new Dimension(1245, 720));
         
         topLabel = new JLabel();
         topLabel.setBounds(0, 0, 1245, 50);
         topLabel.setOpaque(true);
-        topLabel.setBackground(new Color(36, 37, 38));
+        topLabel.setBackground(Colors.INNERBACKGROUND);
         
         titleLabel = new JLabel("MEDISAFE");
-        titleLabel.setForeground(new Color(204, 44, 44));
+        titleLabel.setForeground(Colors.RED);
         titleLabel.setFont(new Font("Arial", Font.BOLD, 26));
         titleLabel.setBounds(15, 15, 320, 20);
         
@@ -63,7 +70,7 @@ public class UserFrame extends JFrame {
         if (MedicPatientList.getCurrentPatient().getFname() == null || MedicPatientList.getCurrentPatient().getLname() == null){
             warningLabel = new JLabel("    WARNING: We need more informations about you. Press here or in the top right corner to complete your registration.");
             warningLabel.setOpaque(true);
-            warningLabel.setBackground(new Color(152, 100, 0));
+            warningLabel.setBackground(Colors.YELLOW);
             warningLabel.setForeground(Color.WHITE);
             warningLabel.setFont(new Font("Arial", Font.PLAIN, 18));
             warningLabel.setBounds(15, 60, 1215, 50);
@@ -91,7 +98,7 @@ public class UserFrame extends JFrame {
         //replaced appointmentslabel with a list + scrollpane
         appointmentsList = new JList(MedicPatientList.getCurrentPatient().getAppointments().toArray());
         appointmentsList.setOpaque(true);
-        appointmentsList.setBackground(new Color(36, 37, 38));
+        appointmentsList.setBackground(Colors.INNERBACKGROUND);
         appointmentsList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         appointmentsList.setForeground(Color.WHITE);
         
@@ -108,7 +115,7 @@ public class UserFrame extends JFrame {
 
         feedLabel = new JLabel();
         feedLabel.setOpaque(true);
-        feedLabel.setBackground(new Color(36, 37, 38));
+        feedLabel.setBackground(Colors.INNERBACKGROUND);
         feedLabel.setBounds(430, 240, 800, 445);
 
         timerLabel = new JLabel();

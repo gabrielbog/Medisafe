@@ -40,10 +40,10 @@ public class SignUpFrame extends JFrame {
         logInPanel = new JPanel();
         logInPanel.setLayout(null);
         logInPanel.setPreferredSize(new Dimension(350, 340));
-        logInPanel.setBackground(new Color(28, 30, 33));
+        logInPanel.setBackground(UserFrame.Colors.BACKGROUND);
 
         titleLabel = new JLabel("MEDISAFE");
-        titleLabel.setForeground(new Color(204, 44, 44));
+        titleLabel.setForeground(UserFrame.Colors.RED);
         titleLabel.setFont(new Font("Arial", Font.BOLD, 26));
         titleLabel.setBounds(15, 15, 320, 20);
 
@@ -83,7 +83,7 @@ public class SignUpFrame extends JFrame {
         
         signUpButton = new JButton();
         signUpButton.setText("Sign up");
-        signUpButton.setBackground(new Color(204, 44, 44));
+        signUpButton.setBackground(UserFrame.Colors.RED);
         signUpButton.setForeground(Color.white);
         signUpButton.setFont(new Font("Arial", Font.PLAIN, 14));
         signUpButton.setBounds(15, 270, 320, 30);
@@ -137,7 +137,7 @@ public class SignUpFrame extends JFrame {
         });
         
         backButton = new JButton("Back");
-        backButton.setBackground(new Color(204, 44, 44));
+        backButton.setBackground(UserFrame.Colors.RED);
         backButton.setForeground(Color.white);
         backButton.setFont(new Font("Arial", Font.PLAIN, 14));
         backButton.setBounds(135, 310, 80, 15);

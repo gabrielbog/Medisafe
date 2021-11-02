@@ -23,14 +23,15 @@ public class TimerThread extends Thread
             try
             {
                 second++;
-                if(second > 60)
+                if(second > 59)
                 {
                     second = 0;
                     minute++;
-                    if(hour > 60)
+                    if(minute > 59)
                     {
+                        minute = 0;
                         hour++;
-                        if(hour > 24)
+                        if(hour > 23)
                         {
                             hour = 0;
                         }

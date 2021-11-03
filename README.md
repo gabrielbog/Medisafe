@@ -1,9 +1,31 @@
 # Medisafe
+Our project theme is personalized medicine.
 
+# Features Shipped
+- [x] login
+- [x] signup
+- [x] create appointments
+- [x] database communication
+
+# Design
 ![medisafe](docs/design/Medisafe.png)
 
-Our project is based on medicine.
+Design created using [figma](https://www.figma.com).
 
+# Programs and libraries hosted in this solution
+- [junit](https://junit.org/junit5/) - Unit testing
+- [mysql-connector-java](https://mvnrepository.com/artifact/mysql/mysql-connector-java) - Java JDBC
+- [xampp](https://www.apachefriends.org/index.html) - Used for MYSQL db hosting
+
+# Supported platforms / recommended toolchains
+The following are recommended toolchains for popular platforms.
+
+Windows [Intellij IDEA](), Java SDK 17. 
+
+# Build system generation
+```bash
+mvn package
+```
 # Github Organization
 First, click on the **Fork button** in the top-right corner. 
 
@@ -73,4 +95,19 @@ To pull the changes from the upstream repository run the following command:
 
 ```bash
 git fetch upstream
+git rebase upstream/develop
 ```
+
+# Contributors
+- Bogoslov Ioan Gabriel
+    - Backend
+    - Implemented the logic and classes behind the login system and appointemnts
+    - UML Diagrams
+- Vasile Campeanu
+    - Github Organization/Documentation
+    - Interface design
+    - Database Implementation
+- Iagar Catalin
+    - Front end
+    - Implemented the graphical interface and all user interactions
+    - UML Diagrams

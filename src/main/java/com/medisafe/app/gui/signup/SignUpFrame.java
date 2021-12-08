@@ -1,6 +1,8 @@
 package com.medisafe.app.gui.signup;
 
+import com.medisafe.app.classes.Application;
 import com.medisafe.app.classes.MedicPatientList;
+import com.medisafe.app.classes.Patient;
 import com.medisafe.app.gui.login.LogInFrame;
 import com.medisafe.app.gui.user.UserFrame;
 
@@ -8,6 +10,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 public class SignUpFrame extends JFrame {
     public static SignUpFrame signUpFrame;
@@ -106,31 +109,37 @@ public class SignUpFrame extends JFrame {
 
                 else
                 {
-                    int verify = MedicPatientList.verifyNewUser(username, email);
-                    if(verify == 1)
+                    try
                     {
-                        MedicPatientList.addPatient(MedicPatientList.getLatestPatientId() + 1, username, email, password);
-                        MedicPatientList.setCurrentPatient(MedicPatientList.getPatientVector().get(MedicPatientList.getPatientVector().size() - 1));
-                        
-                        //save on database in case
-                        
-                        username = null;
-                        password = null;
-                        email = null;
-                        passwordField.setText("");
-                        emailField.setText("");
-                        signUpFrame.dispose();
-                        UserFrame.userFrame = new UserFrame();
-                    }
+                        boolean verify = Application.verify_newUser(username, email);
+                        if(verify == true)
+                        {
+                            MedicPatientList.setCurrentPatient(new Patient(MedicPatientList.getLatestDatabaseId(), username, email));
 
-                    else
+                            //save on database in case
+
+                            username = null;
+                            password = null;
+                            email = null;
+                            passwordField.setText("");
+                            emailField.setText("");
+                            signUpFrame.dispose();
+                            UserFrame.userFrame = new UserFrame();
+                        }
+
+                        else
+                        {
+                            JOptionPane.showMessageDialog(null, "Username/Email is already used by another user", "Error", JOptionPane.ERROR_MESSAGE);
+                            username = null;
+                            password = null;
+                            email = null;
+                            passwordField.setText("");
+                            emailField.setText("");
+                        }
+                    }
+                    catch(SQLException ex)
                     {
-                        JOptionPane.showMessageDialog(null, "Username/Email is already used by another user", "Error", JOptionPane.ERROR_MESSAGE);
-                        username = null;
-                        password = null;
-                        email = null;
-                        passwordField.setText("");
-                        emailField.setText("");
+                        ex.printStackTrace();
                     }
                 }
             }

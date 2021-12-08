@@ -16,19 +16,22 @@ public class Patient extends User
     //variables
     private ArrayList<Appointment> appointments = new ArrayList<Appointment>();
     
+    //notificarile ar trebui sa fie aici eventual
+    //private LinkedBlockingQueue<String> notifications = new LinkedBlockingQueue<String>();
+    
     //constructors
-    public Patient(int id, String username, String email, String fname, String lname, String password, boolean medic)
+    public Patient(int id, String username, String email, String fname, String lname, boolean medic)
     {
         //used for loading the database in an object
 
-        super(id, username, email, fname, lname, password, medic);
+        super(id, username, email, fname, lname, medic);
     }
 
-    public Patient(int id, String username, String email, String password)
+    public Patient(int id, String username, String email)
     {
         //used when creating a new account
 
-        super(id, username, email, password);
+        super(id, username, email);
     }
     
     //get, set, toString, equals
@@ -70,8 +73,7 @@ public class Patient extends User
         {
             Patient tmp = (Patient)o;
             if(tmp.getId() != getId() || !tmp.getUsername().equals(getUsername()) || !tmp.getEmail().equals(getEmail())
-                || !tmp.getFname().equals(getFname()) || !tmp.getLname().equals(getLname()) || !tmp.getPassword().equals(getPassword())
-                || tmp.isMedic() != isMedic()
+                || !tmp.getFname().equals(getFname()) || !tmp.getLname().equals(getLname()) || tmp.isMedic() != isMedic()
                 || tmp.getAppointments() == appointments)
                 return false;
             return true;

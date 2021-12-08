@@ -8,18 +8,16 @@ public abstract class MedicPatientList
     
     //variables
     
-    /*
-    private static Patient patientVector[] = new Patient[256];
-    private static Medic medicVector[] = new Medic[256];
-    */
-    
-    private static ArrayList<Patient> patientVector = new ArrayList<Patient>();
+    //private static ArrayList<Patient> patientVector = new ArrayList<Patient>();
+    private static int latestDatabaseId = 0;
     private static ArrayList<Medic> medicVector = new ArrayList<Medic>();
     
     private static Patient currentPatient = null;
     private static Medic currentMedic = null;
     
     //get, set
+    
+    /*
     public static ArrayList<Patient> getPatientVector()
     {
         return patientVector;
@@ -39,6 +37,7 @@ public abstract class MedicPatientList
     {
         MedicPatientList.patientVector.set(i, patient);
     }
+    */
 
     public static ArrayList<Medic> getMedicVector()
     {
@@ -80,11 +79,18 @@ public abstract class MedicPatientList
         MedicPatientList.currentMedic = currentMedic;
     }
 
-    
-    
-    
-    
+    public static int getLatestDatabaseId()
+    {
+        return latestDatabaseId;
+    }
+
+    public static void setLatestDatabaseId(int latestPatientId)
+    {
+        MedicPatientList.latestDatabaseId = latestPatientId;
+    }
+
     //other methods
+    /*
     public static void addPatient(int id, String username, String email, String fname, String lname, String password, boolean medic)
     {
         patientVector.add(new Patient(id, username, email, fname, lname, password, medic));
@@ -94,17 +100,19 @@ public abstract class MedicPatientList
     {
         patientVector.add(new Patient(id, username, email, password));
     }
+    */
     
-    public static void addMedic(int id, String username, String email, String fname, String lname, String password, boolean medic)
+    public static void addMedic(int id, String username, String email, String fname, String lname, boolean medic)
     {
-        medicVector.add(new Medic(id, username, email, fname, lname, password, medic));
+        medicVector.add(new Medic(id, username, email, fname, lname, medic));
     }
     
-    public static void addMedic(int id, String username, String email, String password)
+    public static void addMedic(int id, String username, String email)
     {
-        medicVector.add(new Medic(id, username, email, password));
+        medicVector.add(new Medic(id, username, email));
     }
     
+    /*
     public static int verifyUser(String username, String password)
     {
         for(int i = 0; i < patientVector.size(); ++i)
@@ -138,7 +146,9 @@ public abstract class MedicPatientList
 
         return 1;
     }
+    */
     
+    /*
     public static int getLatestPatientId()
     {
         int latestPatientId = 0;
@@ -149,6 +159,7 @@ public abstract class MedicPatientList
             
         return latestPatientId;
     }
+    */
 
     public static int getLatestMedicId()
     {
@@ -165,12 +176,12 @@ public abstract class MedicPatientList
     {
         //convert patient to medic
         currentMedic = new Medic(MedicPatientList.getLatestMedicId() + 1, currentPatient.getUsername(), currentPatient.getEmail(),
-                                currentPatient.getFname(), currentPatient.getLname(), currentPatient.getPassword(), true);
+                                currentPatient.getFname(), currentPatient.getLname(), true);
         currentMedic.setAppointments(currentPatient.getAppointments()); //dont forget to copy the appointments too
         medicVector.add(currentMedic);
         
         //remove patient from vector
-        patientVector.remove(currentPatient);
+        //patientVector.remove(currentPatient);
         currentPatient.setAppointments(null);
         currentPatient = null;
         
@@ -179,6 +190,7 @@ public abstract class MedicPatientList
     }
     
     //debug stuff
+    /*
     public static void patientShow()
     {
         for(int i = 0; i < patientVector.size(); ++i)
@@ -189,6 +201,7 @@ public abstract class MedicPatientList
             }
         }
     }
+    */
 
     public static void medicShow()
     {

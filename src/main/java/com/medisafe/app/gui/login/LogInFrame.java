@@ -1,6 +1,8 @@
 package com.medisafe.app.gui.login;
 
-import com.medisafe.app.classes.MedicPatientList;
+import java.sql.SQLException;
+
+import com.medisafe.app.classes.Application;
 import com.medisafe.app.gui.medic.MedicFrame;
 import com.medisafe.app.gui.user.UserFrame;
 
@@ -95,31 +97,38 @@ public class LogInFrame extends JFrame {
         
                 else
                 {
-                    int verify = MedicPatientList.verifyUser(username, password);
-                    if(verify == 1)
+                    try
                     {
-                        username = null;
-                        password = null;
-                        passwordField.setText("");
-                        logInFrame.dispose();
-                        UserFrame.userFrame = new UserFrame();
-                    }
+                        int verify = Application.verify_user(username, password);
+                        if(verify == 1)
+                        {
+                            username = null;
+                            password = null;
+                            passwordField.setText("");
+                            logInFrame.dispose();
+                            UserFrame.userFrame = new UserFrame();
+                        }
 
-                    else if(verify == 2)
-                    {
-                        username = null;
-                        password = null;
-                        passwordField.setText("");
-                        LogInFrame.logInFrame.dispose();
-                        MedicFrame.medicFrame = new MedicFrame();
-                    }
+                        else if(verify == 2)
+                        {
+                            username = null;
+                            password = null;
+                            passwordField.setText("");
+                            LogInFrame.logInFrame.dispose();
+                            MedicFrame.medicFrame = new MedicFrame();
+                        }
 
-                    else
+                        else
+                        {
+                            JOptionPane.showMessageDialog(null, "Incorrect Creditentials!", "Error", JOptionPane.ERROR_MESSAGE);
+                            username = null;
+                            password = null;
+                            passwordField.setText("");
+                        }
+                    }
+                    catch(SQLException ex)
                     {
-                        JOptionPane.showMessageDialog(null, "Incorrect Creditentials!", "Error", JOptionPane.ERROR_MESSAGE);
-                        username = null;
-                        password = null;
-                        passwordField.setText("");
+                        ex.printStackTrace();
                     }
                 }
             }

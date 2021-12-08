@@ -11,11 +11,10 @@ public class User
     
     private String fname = null;
     private String lname = null;
-    private String password;
     private boolean medic = false;
     
     //constructors
-    public User(int id, String username, String email, String fname, String lname, String password, boolean medic)
+    public User(int id, String username, String email, String fname, String lname, boolean medic)
     {
         //used for loading the database in an object
         
@@ -24,18 +23,16 @@ public class User
         this.email = email;
         this.fname = fname;
         this.lname = lname;
-        this.password = password;
         this.medic = medic;
     }
     
-    public User(int id, String username, String email, String password)
+    public User(int id, String username, String email)
     {
         //used when creating a new account
 
         this.id = id; //it should load the last id everytime
         this.username = username;
         this.email = email;
-        this.password = password;
     }
 
     //get, set, toString, equals methods
@@ -88,17 +85,7 @@ public class User
     {
         this.lname = lname;
     }
-
-    public String getPassword()
-    {
-        return password;
-    }
-
-    public void setPassword(String password)
-    {
-        this.password = password;
-    }
-
+    
     public boolean isMedic()
     {
         return medic;
@@ -118,7 +105,6 @@ public class User
             ", email='" + email + '\'' +
             ", fname='" + fname + '\'' +
             ", lname='" + lname + '\'' +
-            ", password='" + password + '\'' +
             ", medic=" + medic +
             '}';
     }
@@ -130,8 +116,7 @@ public class User
         {
             User tmp = (User)o;
             if(tmp.getId() != id || !tmp.getUsername().equals(username) || !tmp.getEmail().equals(email)
-                || !tmp.getFname().equals(fname) || !tmp.getLname().equals(lname) || !tmp.getPassword().equals(password)
-                || tmp.isMedic() != medic)
+                || !tmp.getFname().equals(fname) || !tmp.getLname().equals(lname)  || tmp.isMedic() != medic)
                 return false;
             return true;
         }
